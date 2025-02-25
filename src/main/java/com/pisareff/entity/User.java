@@ -1,12 +1,10 @@
 package com.pisareff.entity;
 
-import com.pisareff.converter.BirthdayConverter;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.time.LocalDate;
 
 //Lombok annotations
 @Data // @Getter+@Setter+@RequiredArgsConstructor+@ToString+@EqualsAndHashCode

@@ -1,9 +1,13 @@
 package com.pisareff;
 
 import com.pisareff.entity.Birthday;
+import com.pisareff.entity.Role;
 import com.pisareff.entity.User;
+import com.pisareff.util.HibernateUtil;
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;
@@ -55,14 +59,15 @@ class HibernateRunnerTest {
 
         System.out.println(sql.formatted(tableName, columnNames, columnValues));
 
-        Connection connection = null;
-        PreparedStatement prepareStatement = connection.prepareStatement(sql);
-        int indexOfField = 1;
-        for (Field declaredField : declaredFields){
-            declaredField.setAccessible(true);
-            prepareStatement.setObject(indexOfField, declaredField.get(user));
-            indexOfField++;
-        }
+//        //ПРИМЕРНОЕ построение запроса
+//        Connection connection = null;
+//        PreparedStatement prepareStatement = connection.prepareStatement(sql);
+//        int indexOfField = 1;
+//        for (Field declaredField : declaredFields){
+//            declaredField.setAccessible(true);
+//            prepareStatement.setObject(indexOfField, declaredField.get(user));
+//            indexOfField++;
+//        }
 
     }
 
