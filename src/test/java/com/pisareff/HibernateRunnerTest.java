@@ -1,19 +1,12 @@
 package com.pisareff;
 
 import com.pisareff.entity.Birthday;
-import com.pisareff.entity.Role;
 import com.pisareff.entity.User;
-import com.pisareff.util.HibernateUtil;
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Optional;
@@ -24,7 +17,7 @@ class HibernateRunnerTest {
 
     // Примерная иллюстрация формирования SQL запроса под капотом Hibernate
     @Test
-    void checkReflectionApi() throws SQLException, IllegalAccessException {
+    void checkReflectionApi() {
         User user = User.builder()
                 .username("pisareff@gmail.com")
                 .firstName("Alexander")
