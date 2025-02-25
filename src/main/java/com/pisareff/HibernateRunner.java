@@ -1,5 +1,7 @@
 package com.pisareff;
 
+import com.pisareff.converter.BirthdayConverter;
+import com.pisareff.entity.Birthday;
 import com.pisareff.entity.Role;
 import com.pisareff.entity.User;
 import org.hibernate.Session;
@@ -13,6 +15,7 @@ public class HibernateRunner {
         Configuration configuration = new Configuration();
         //configuration.setPhysicalNamingStrategy(new CamelCaseToUnderscoresNamingStrategy())
         //configuration.addAnnotatedClass(User.class); // отслеживаем класс сущности
+        configuration.addAttributeConverter(new BirthdayConverter()); // Объявляем конвертер поле autoApply не обязательно если в классе конвертера есть аннотация
         configuration.configure();
 
         try (SessionFactory sessionFactory = configuration.buildSessionFactory();
@@ -24,8 +27,7 @@ public class HibernateRunner {
                     .username("pisareff@gmail.com")
                     .firstName("Alexander")
                     .lastName("Pisareff")
-                    .birthDate(LocalDate.of(1997, 1, 21))
-                    .age(28)
+                    .birthDate(new Birthday(LocalDate.of(1997, 1, 21)))
                     .role(Role.USER)
                     .build();
 

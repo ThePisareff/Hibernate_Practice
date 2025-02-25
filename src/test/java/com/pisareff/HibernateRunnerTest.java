@@ -1,5 +1,6 @@
 package com.pisareff;
 
+import com.pisareff.entity.Birthday;
 import com.pisareff.entity.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;
@@ -24,8 +25,7 @@ class HibernateRunnerTest {
                 .username("pisareff@gmail.com")
                 .firstName("Alexander")
                 .lastName("Pisareff")
-                .birthDate(LocalDate.of(1997, 1, 21))
-                .age(28)
+                .birthDate(new Birthday(LocalDate.of(1997, 1, 21)))
                 .build();
 
         String sql = """
