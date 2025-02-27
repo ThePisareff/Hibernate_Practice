@@ -15,7 +15,7 @@ public class HibernateUtil {
         CONFIGURATION = new Configuration();
         //configuration.setPhysicalNamingStrategy(new CamelCaseToUnderscoresNamingStrategy())
         //configuration.addAnnotatedClass(User.class); // отслеживаем класс сущности
-        CONFIGURATION.addAttributeConverter(new BirthdayConverter()); // Объявляем конвертер поле autoApply не обязательно если в классе конвертера есть аннотация
+        CONFIGURATION.addAttributeConverter(new BirthdayConverter()); // Объявляем конвертер. Поле autoApply не обязательно если в классе конвертера есть аннотация
         CONFIGURATION.configure();
     }
 

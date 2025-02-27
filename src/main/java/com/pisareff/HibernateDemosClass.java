@@ -1,6 +1,7 @@
 package com.pisareff;
 
 import com.pisareff.entity.Birthday;
+import com.pisareff.entity.PersonalInfo;
 import com.pisareff.entity.Role;
 import com.pisareff.entity.User;
 import com.pisareff.util.HibernateUtil;
@@ -23,10 +24,12 @@ public class HibernateDemosClass {
             session.beginTransaction();
 
             User user = User.builder()
-                    .username("pisareff@gmail.com")
-                    .firstName("Alexander")
-                    .lastName("Pisareff")
-                    .birthDate(new Birthday(LocalDate.of(1997, 1, 21)))
+                    .username("thepisareff@gmail.com")
+                    .personalInfo(PersonalInfo.builder()
+                            .firstName("Alex")
+                            .lastName("Pisareff")
+                            .birthDate(new Birthday(LocalDate.of(1997, 1, 21)))
+                            .build())
                     .role(Role.USER)
                     .build();
 
@@ -60,9 +63,11 @@ public class HibernateDemosClass {
 
             User user = User.builder()
                     .username("pisareff@gmail.com")
-                    .firstName("Alexander")
-                    .lastName("Pisareff")
-                    .birthDate(new Birthday(LocalDate.of(1997, 1, 21)))
+                    .personalInfo(PersonalInfo.builder()
+                            .firstName("Alexander")
+                            .lastName("Pisareff")
+                            .birthDate(new Birthday(LocalDate.of(1997, 1, 21)))
+                            .build())
                     .role(Role.USER)
                     .build();
 
