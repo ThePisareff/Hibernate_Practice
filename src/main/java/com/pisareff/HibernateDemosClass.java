@@ -4,12 +4,16 @@ import com.pisareff.entity.Birthday;
 import com.pisareff.entity.Role;
 import com.pisareff.entity.User;
 import com.pisareff.util.HibernateUtil;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import java.time.LocalDate;
 
 public class HibernateDemosClass {
+
+    public static final Logger logger = LogManager.getLogger();
 
     public static void demoPersist() {
 
@@ -25,6 +29,8 @@ public class HibernateDemosClass {
                     .birthDate(new Birthday(LocalDate.of(1997, 1, 21)))
                     .role(Role.USER)
                     .build();
+
+            logger.info("User entity was created and is in transient state : {}", user);
 
             session.merge(user); // Save or update
             session.getTransaction().commit();
