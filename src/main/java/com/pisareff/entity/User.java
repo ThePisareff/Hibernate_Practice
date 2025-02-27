@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 //Lombok annotations
 @Data // @Getter+@Setter+@RequiredArgsConstructor+@ToString+@EqualsAndHashCode
 @NoArgsConstructor
@@ -16,7 +17,11 @@ import lombok.NoArgsConstructor;
 @Table(name = "users", schema = "public") // Маппим на таблицу БД
 public class User {
 
-    @Id // Объявляем как первичный ключ
+    @Id  // Вариант для BIGSERIAL полей с авто генерацией ключа на стороне СУБД
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Объявляем о том, что поле генерируемое
+    private Long id;
+
+    @Column(unique = true) // В данном случае используем как мета информацию для программиста
     private String username;
 
     @Embedded // Необязательная аннотация. Обозначает что тип embeddable (встраиваемый)

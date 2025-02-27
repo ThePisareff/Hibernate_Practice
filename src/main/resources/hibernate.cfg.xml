@@ -15,6 +15,10 @@
         
         
         <mapping class="com.pisareff.entity.User"/>
+        <mapping class="com.pisareff.demo.demoEntity.EntityIdentityPKGen"/>
+        <mapping class="com.pisareff.demo.demoEntity.EntitySequencePKGen"/>
+        <mapping class="com.pisareff.demo.demoEntity.EntityTablePKGen"/>
+        <mapping class="com.pisareff.demo.demoEntity.EntityEmbeddedId"/>
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
     </session-factory>

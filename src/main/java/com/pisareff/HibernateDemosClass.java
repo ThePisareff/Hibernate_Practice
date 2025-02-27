@@ -1,5 +1,6 @@
 package com.pisareff;
 
+import com.pisareff.demo.demoEntity.*;
 import com.pisareff.entity.Birthday;
 import com.pisareff.entity.PersonalInfo;
 import com.pisareff.entity.Role;
@@ -24,9 +25,9 @@ public class HibernateDemosClass {
             session.beginTransaction();
 
             User user = User.builder()
-                    .username("thepisareff@gmail.com")
+                    .username("pisareff@gmail.com")
                     .personalInfo(PersonalInfo.builder()
-                            .firstName("Alex")
+                            .firstName("Alexander")
                             .lastName("Pisareff")
                             .birthDate(new Birthday(LocalDate.of(1997, 1, 21)))
                             .build())
@@ -92,6 +93,87 @@ public class HibernateDemosClass {
 
             session.remove(user);
 
+            session.getTransaction().commit();
+        }
+    }
+
+    public static void demoIdentityPKGen(){
+        try (SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+             Session session = sessionFactory.openSession()) {
+
+            session.beginTransaction();
+
+            EntityIdentityPKGen entity = EntityIdentityPKGen.builder()
+                    .info("Полученный ключ сгенерирован СУБД автоматически")
+                    .build();
+
+            session.persist(entity); // Save or update
+            session.getTransaction().commit();
+        }
+    }
+
+    public static void demoSequencePKGen(){
+        try (SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+             Session session = sessionFactory.openSession()) {
+
+            session.beginTransaction();
+
+            EntitySequencePKGen entity = EntitySequencePKGen.builder()
+                    .info("Полученный ключ сгенерирован Hibernate c помощью последовательности из СУБД")
+                    .build();
+
+            session.persist(entity); // Save or update
+            session.getTransaction().commit();
+        }
+    }
+
+    public static void demoTablePKGen(){
+        try (SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+             Session session = sessionFactory.openSession()) {
+
+            session.beginTransaction();
+
+            EntityTablePKGen entity = EntityTablePKGen.builder()
+                    .info("Полученный ключ сгенерирован Hibernate через таблицу с ключами")
+                    .build();
+
+            session.persist(entity); // Save or update
+            session.getTransaction().commit();
+        }
+    }
+
+    public static void demoEmbeddedIdPersist(){
+        try (SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+             Session session = sessionFactory.openSession()) {
+
+            session.beginTransaction();
+
+            EntityEmbeddedId entity = EntityEmbeddedId.builder()
+                    .embeddedIdentifier(EmbeddedIdentifier.builder()
+                            .firstName("Alex")
+                            .lastName("Pisareff")
+                            .build())
+                    .info("Данная сущность имеет составной ключ, реализованный через Embedded class")
+                    .build();
+
+            session.persist(entity); // Save or update
+            session.getTransaction().commit();
+        }
+    }
+
+    public static void demoEmbeddedIdGet(){
+        try (SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+             Session session = sessionFactory.openSession()) {
+
+            session.beginTransaction();
+
+            EmbeddedIdentifier key = EmbeddedIdentifier.builder()
+                    .firstName("Alex")
+                    .lastName("Pisareff")
+                    .build();
+
+            EntityEmbeddedId entity = session.get(EntityEmbeddedId.class, key);// Save or update
+            System.out.println(entity);
             session.getTransaction().commit();
         }
     }
